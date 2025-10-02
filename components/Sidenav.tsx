@@ -4,6 +4,7 @@ import TopicLinks from "./TopicLinks";
 import NavLink from "./NavLink";
 import SignOutButton from "./SignOutButton";
 import NewTopicButton from "./NewTopicButton";
+import Link from "next/link";
 
 export default async function SideNav() {
   return (

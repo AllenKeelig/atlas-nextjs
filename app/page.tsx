@@ -2,6 +2,7 @@ import Image from "next/image";
 import placeholder from "@/assets/placeholder.svg";
 import Link from "next/link";
 
+
 export default function Page() {
   return (
     <main className="w-screen py-12 md:py-24 lg:py-32 flex flex-col items-center justify-center">
