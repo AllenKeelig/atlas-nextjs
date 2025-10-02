@@ -1,4 +1,5 @@
 import { HashtagIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 // Loading animation
 const shimmer =
@@ -40,7 +41,7 @@ export function TopicsSkeleton() {
       <div className="mb-4 h-8 w-36 rounded-md " />
       <div className="flex grow flex-col justify-between rounded-xl bg-gray-100 p-1 mb-4">
         <div className="bg-white px-2">
-          <AskQuestionSkeleton />
+          <LinkskQuestionSkeleton />
         </div>
       </div>
       <div className="flex grow flex-col justify-between rounded-xl bg-gray-100 p-1">
