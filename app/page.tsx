@@ -1,7 +1,7 @@
 import Image from "next/image";
 import placeholder from "@/assets/placeholder.svg";
 import Link from "next/link";
-
+import { signIn } from "@/auth";
 
 export default function Page() {
   return (
@@ -41,3 +41,13 @@ export default function Page() {
     </main>
   );
 }
+<form
+  action={async () => {
+    "use server";
+    await signIn("default", { redirectTo: "/ui" });
+  }}
+>
+  <button className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
+    <div>Sign In</div>
+  </button>
+</form>
