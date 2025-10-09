@@ -2,10 +2,8 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { insertTopic } from "./data";
+import { insertTopic, insertAnswer, markAnswerAsAccepted, incrementVotes, insertQuestion } from "./data";
 import { redirect } from "next/navigation";
-import { insertQuestion } from "./data";
-import { incrementVotes } from "./data";
 
 export async function addTopic(data: FormData) {
   let topic;
@@ -43,4 +41,26 @@ export async function addVote(data: FormData) {
     console.error("Database Error:", error);
     throw new Error("Failed to add vote.");
   }
+}
+
+export async function addAnswer(data: FormData) {
+  const answer = data.get("answer") as string;
+  const question_id = data.get("question_id") as string;
+
+  if (!answer || !question_id) throw new Error("Missing answer or question ID");
+
+  await insertAnswer({ answer, question_id });
+
+  revalidatePath(`/ui/questions/${question_id}`);
+}
+
+export async function acceptAnswer(data: FormData) {
+  const question_id = data.get("question_id") as string;
+  const answer_id = data.get("answer_id") as string;
+
+  if (!question_id || !answer_id) throw new Error("Missing question ID or answer ID");
+
+  await markAnswerAsAccepted(question_id, answer_id);
+
+  revalidatePath(`/ui/questions/${question_id}`);
 }
