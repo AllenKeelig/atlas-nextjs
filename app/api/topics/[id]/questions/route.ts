@@ -1,10 +1,11 @@
+// app/api/topics/[id]/questions/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { fetchQuestions } from "@/lib/data";
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, context: { params: Promise<{ id: string }> }) {
   try {
-    const topicId = params.id;
-    const questions = await fetchQuestions(topicId);
+    const { id } = await context.params;
+    const questions = await fetchQuestions(id);
     return NextResponse.json(questions);
   } catch (error) {
     console.error(error);
